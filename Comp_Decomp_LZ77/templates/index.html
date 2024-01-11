@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link rel="stylesheet" type="text/css" href="styles.css" />
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Compresor/Decompresor LZ77</title>
+
+    <style>
+      :root {
+          font-size: 20px;
+        }
+
+        *,
+        *:before,
+        *:after {
+          box-sizing: border-box;
+        }
+
+        p {
+          margin: 0;
+        }
+
+        p:not(:last-child) {
+          margin-bottom: 1.5em;
+        }
+
+        .container {
+            display: flex;
+            justify-content: space-between;
+            width: 80%;
+            margin-top: 2rem;
+          }
+
+        .card {
+          max-width: 300px;
+          min-height: 200px;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          allign-items: center;
+
+          max-width: 500px;
+          height: 300px;
+          padding: 35px;
+
+          border: 1px solid rgba(255, 255, 255, .25);
+          border-radius: 20px;
+          background-color: rgba(255, 255, 255, 0.45);
+          box-shadow: 0 0 10px 1px rgba(0, 0, 0, 0.25);
+
+          margin: 5rem;
+
+          background-color: #56596c;
+        }
+
+        .card-footer {
+          font-size: 0.65em;
+          color: #446;
+        }
+
+      body {
+          background-color: #30333c;
+          color: white;
+          font-family: Roboto;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          min-height: 100vh;
+      }
+
+      h1 {
+          text-align: center;
+          font-size: 40px;
+          padding: 5px;
+          margin: 15px;
+          margin-top: -50px;
+          border
+      }
+
+      form {
+          margin-top: 20px;
+      }
+
+      label, input, button {
+          display: block;
+          margin-bottom: 10px;
+      }
+
+      button {
+        background-color: #2e7eff;
+        border: none;
+        border-radius: 15px;
+        font-weight: bold;
+        color: white;
+        padding: 10px 20px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+      }
+      
+      button:hover {
+        background-color: #1a5cb8; /* Color azul más oscuro al pasar el mouse */
+      }
+      
+
+
+    </style>
+  </head>
+  <body>
+    <h1>Compresor/Decompresor LZ77</h1>
+
+
+    <div class="container">
+        <div class="card">
+            <form action="/compress" method="post" enctype="multipart/form-data">
+                <label for="file">Selecciona archivo a comprimir:</label>
+                <input type="file" name="file" id="file" required />
+        
+                <label for="max_search">Tamaño máximo de búsqueda:</label>
+                <input type="number" name="max_search" id="max_search" required />
+        
+                <button type="submit">COMPRIMIR</button>
+            </form>
+        </div>
+
+        <div class="card">
+            <form action="/decompress" method="post" enctype="multipart/form-data">
+                <label for="compressed_file">Selecciona archivo a descomprimir:</label>
+                <input type="file" name="compressed_file" id="compressed_file" required />
+        
+                <label for="max_search_decompress">Tamaño máximo de búsqueda:</label>
+                <input
+                type="number"
+                name="max_search_decompress"
+                id="max_search_decompress"
+                required
+                />
+                <button type="submit">DESCOMPRIMIR</button>
+            </form>
+        </div>
+    </div>
+
+    {% if compression_percentage %}
+    <p>Porcentaje de compresión aproximado: {{ compression_percentage }}%</p>
+    {% endif %}
+  </body>
+</html>
